@@ -1,0 +1,11 @@
+.idea/uiDesigner.xml
+.idea/libraries
+.idea/copyright
+.idea/shelf
+.idea/workspace.xml
+.idea/artifacts/*
+.gradle
+build
+out
+
+*~

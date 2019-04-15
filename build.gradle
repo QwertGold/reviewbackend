@@ -1,0 +1,46 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'findbugs'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+    compile("commons-codec:commons-codec")
+    compile("commons-io:commons-io:2.6")
+    compile 'mysql:mysql-connector-java'
+    compile 'org.projectlombok:lombok:1.16.10'
+    compile 'org.hibernate:hibernate-validator:5.1.1.Final'
+
+    compile "com.google.code.findbugs:annotations:3.0.0"
+
+
+
+    testCompile("junit:junit")
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
