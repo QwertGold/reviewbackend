@@ -2,15 +2,13 @@ package com.example.review.backend.web;
 
 import com.example.review.backend.dto.IDResult;
 import com.example.review.backend.dto.ReviewableDTO;
-import com.example.review.backend.jpa.Reviewable;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
@@ -39,7 +37,7 @@ public class ReviewControllerTest {
         ClassPathResource resource = new ClassPathResource("/lagkage.jpg");
 
         String base64Image;
-        try(InputStream inputStream = resource.getInputStream()) {
+        try (InputStream inputStream = resource.getInputStream()) {
             byte[] bytes = IOUtils.toByteArray(inputStream);
             base64Image = Base64.encodeBase64String(bytes);
         }
@@ -70,12 +68,12 @@ public class ReviewControllerTest {
         ClassPathResource resource = new ClassPathResource("/lagkage.jpg");
 
         String base64Image;
-        try(InputStream inputStream = resource.getInputStream()) {
+        try (InputStream inputStream = resource.getInputStream()) {
             byte[] bytes = IOUtils.toByteArray(inputStream);
             base64Image = Base64.encodeBase64String(bytes);
         }
 
-        for(int i = 0; i < 50; i++){
+        for (int i = 0; i < 50; i++) {
 
             ReviewableDTO dto = new ReviewableDTO()
                     .setDescription("Look delicious food")
@@ -93,7 +91,6 @@ public class ReviewControllerTest {
         reviews = template.getForEntity("/review?page=1&size=30", ReviewableDTO[].class).getBody();
         assertNotNull(reviews);
         assertEquals(20, reviews.length);
-
 
 
     }

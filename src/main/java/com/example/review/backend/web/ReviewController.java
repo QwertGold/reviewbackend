@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,7 @@ public class ReviewController {
     }
 
     @PostMapping(value = {"", "/"})
-    private IDResult createReviewable(@RequestBody ReviewableDTO dto) {
+    public IDResult createReviewable(@Valid @RequestBody ReviewableDTO dto) {
         Reviewable reviewable = Reviewable.fromDTO(dto);
         repository.save(reviewable);
         return new IDResult().setId(reviewable .getUniqueId());
